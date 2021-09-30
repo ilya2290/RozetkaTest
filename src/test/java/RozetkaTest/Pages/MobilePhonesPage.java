@@ -1,7 +1,6 @@
 package RozetkaTest.Pages;
 
 import com.codeborne.selenide.*;
-import org.openqa.selenium.support.pagefactory.ByChained;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -109,39 +108,18 @@ public class MobilePhonesPage {
 
     }
 
-  public List<String> parseAllPrice1s() {
+ //Парс с плашки
+    public List<String> parseAllPrice1s() {
+        List<String> stringListOfPrices = new ArrayList<>();
+        String str = " Акция ";
+        ElementsCollection collection = elements(byClassName("goods-tile__label"));
+        for (SelenideElement collect : collection) {
+            String prices = collect.getText();
+            stringListOfPrices.add(prices);
+        }
+        return stringListOfPrices;
+    }
 
-      $("body > app-root > div > div > rz-category > div > main > rz-catalog > div > div > section")
-              .should(Condition.exist, Duration.ofSeconds(8000));
-
-      List<String> stringListOfPrices = new ArrayList<>();
-      List<Integer> integerListOfPrices;
-      ElementsCollection collectionOfPrices;
-
-      collectionOfPrices =
-      $(byClassName("goods-tile__inner")).
-              findAll(new ByChained(byClassName("goods-tile__label"),
-                      byClassName("goods-tile__price-value")));
-
-
-
-      for (SelenideElement collect : collectionOfPrices) {
-          String prices = collect.getText();
-          stringListOfPrices.add(prices);
-      }
-
-//      integerListOfPrices = stringListOfPrices
-//              .stream()
-//              .map(Integer::parseInt)
-//              .collect(Collectors.toList());
-
-      return stringListOfPrices;
-
-  }
 }
-
-
-
-
 
 
